@@ -1,3 +1,4 @@
+
 let sortOrderAsc = true; // To track the current sort order
 
 function sortAlbums() {
@@ -18,7 +19,7 @@ function sortAlbums() {
                 return aValue.localeCompare(bValue);
             case 'date':
                 aValue = new Date(a.getAttribute('data-date'));
-                bValue = new Date(a.getAttribute('data-date'));
+                bValue = new Date(b.getAttribute('data-date'));
                 return aValue - bValue;
         }
     });
@@ -27,158 +28,49 @@ function sortAlbums() {
         albums.reverse();
     }
 
-    // Clear the grid and append sorted albums
-    while (grid.firstChild) {
-        grid.removeChild(grid.firstChild);
-    }
     albums.forEach(album => grid.appendChild(album));
 }
 
-function toggleSortOrder() {
-    sortOrderAsc = !sortOrderAsc;
-    document.getElementById('sort-order-btn').textContent = sortOrderAsc ? '↑' : '↓';
-    sortAlbums();
+function filterByTag() {
+    const grid = document.getElementById('album-grid');
+    const albums = Array.from(grid.getElementsByClassName('album'));
+    const selectedTag = document.getElementById('tag-options').value;
+
+    albums.forEach(album => {
+        if (selectedTag === 'all' || album.getAttribute('data-tag') === selectedTag) {
+            album.style.display = 'block';
+        } else {
+            album.style.display = 'none';
+        }
+    });
 }
 
-function filterAlbums() {
-    const selectedOptions = Array.from(document.getElementById('filter-tags').selectedOptions).map(option => option.value.toLowerCase());
-    const albums = document.getElementsByClassName('album');
-
-    Array.from(albums).forEach(album => {
-        const genres = album.getAttribute('data-genres').toLowerCase().split(' ');
-        const arts = album.getAttribute('data-art').toLowerCase().split(' ');
-        const match = selectedOptions.length === 0 || selectedOptions.every(filter => genres.includes(`#${filter}`) || arts.includes(`#${filter}`));
-        album.style.display = match ? 'block' : 'none';
-    });
+function adjustGridWidth() {
+    const grid = document.getElementById('album-grid');
+    const gridWidth = document.getElementById('grid-width').value;
+    grid.style.gridTemplateColumns = `repeat(auto-fill, minmax(${gridWidth}px, 1fr))`;
 }
 
 function searchAlbums() {
-    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-    const albums = document.getElementsByClassName('album');
+    const grid = document.getElementById('album-grid');
+    const albums = Array.from(grid.getElementsByClassName('album'));
+    const searchQuery = document.getElementById('search-input').value.toLowerCase();
 
-    Array.from(albums).forEach(album => {
+    albums.forEach(album => {
         const title = album.getAttribute('data-title').toLowerCase();
         const artist = album.getAttribute('data-artist').toLowerCase();
-        const date = album.getAttribute('data-date').toLowerCase();
-        const genres = album.getAttribute('data-genres').toLowerCase();
-        const arts = album.getAttribute('data-art').toLowerCase();
-        const match = title.includes(searchTerm) || artist.includes(searchTerm) || date.includes(searchTerm) || genres.includes(searchTerm) || arts.includes(searchTerm);
-        album.style.display = match ? 'block' : 'none';
+        if (title.includes(searchQuery) || artist.includes(searchQuery)) {
+            album.style.display = 'block';
+        } else {
+            album.style.display = 'none';
+        }
     });
 }
 
-function showPopup(element) {
-    const popup = element.nextElementSibling;
-    const allPopups = document.querySelectorAll('.popup');
-    allPopups.forEach(p => p.style.display = 'none'); // Hide all popups
-    popup.style.display = 'block';
-    popup.style.position = 'fixed';
-    popup.style.top = '50%';
-    popup.style.left = '50%';
-    popup.style.transform = 'translate(-50%, -50%)';
-    popup.style.width = '60%'; // Ensure larger size for clicked popup
-    document.body.style.overflow = 'hidden';
-}
-
-function hidePopup(element) {
-    const popup = element.parentElement;
-    popup.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-function populateFilterOptions() {
-    const albums = document.getElementsByClassName('album');
-    const tags = new Set();
-
-    Array.from(albums).forEach(album => {
-        album.getAttribute('data-genres').toLowerCase().split(' ').forEach(tag => {
-            tags.add(tag.replace('#', ''));
-        });
-        album.getAttribute('data-art').toLowerCase().split(' ').forEach(tag => {
-            tags.add(tag.replace('#', ''));
-        });
-    });
-
-    const filterSelect = document.getElementById('filter-tags');
-    filterSelect.innerHTML = '';
-
-    Array.from(tags).sort().forEach(tag => {
-        const option = document.createElement('option');
-        option.value = tag;
-        option.text = tag;
-        filterSelect.appendChild(option);
-    });
-
-    $(filterSelect).select2({
-        placeholder: "Select tags",
-        allowClear: true,
-        closeOnSelect: false,
-        dropdownCssClass: 'dark-dropdown' // Add this line to apply dark theme
-    });
-}
-
-function toggleToolbar() {
-    const toolbarContent = document.getElementById('toolbar-content');
-    const toggleBtn = document.getElementById('toggle-toolbar-btn');
-    if (toolbarContent.style.display === 'none') {
-        toolbarContent.style.display = 'flex';
-        toggleBtn.textContent = '▼ Close Toolbar';
-    } else {
-        toolbarContent.style.display = 'none';
-        toggleBtn.textContent = '▲ Open Toolbar';
-    }
-}
-
-function toggleInfoPopup() {
-    const popup = document.getElementById('info-popup');
-    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
-}
-
-function showHoverPopup(event) {
-    const popup = document.getElementById('hover-popup');
-    const content = document.getElementById('hover-popup-content');
-    const album = event.target.closest('.album');
-    content.textContent = `Title: ${album.getAttribute('data-title')}\nArtist: ${album.getAttribute('data-artist')}\nDate: ${album.getAttribute('data-date')}`;
-    
-    popup.style.left = `${event.pageX + 10}px`;
-    popup.style.top = `${event.pageY + 10}px`;
-    popup.style.display = 'block';
-}
-
-function hideHoverPopup() {
-    const popup = document.getElementById('hover-popup');
-    popup.style.display = 'none';
-}
-
-function showCenterPopup(event) {
-    const popup = document.getElementById('center-popup');
-    const content = document.getElementById('center-popup-content');
-    const album = event.target.closest('.album');
-    content.textContent = `Title: ${album.getAttribute('data-title')}\nArtist: ${album.getAttribute('data-artist')}\nDate: ${album.getAttribute('data-date')}`;
-    
-    popup.style.display = 'block';
-    document.addEventListener('click', hideCenterPopupOnClickOutside);
-}
-
-function hideCenterPopup() {
-    const popup = document.getElementById('center-popup');
-    popup.style.display = 'none';
-    document.removeEventListener('click', hideCenterPopupOnClickOutside);
-}
-
-function hideCenterPopupOnClickOutside(event) {
-    const popup = document.getElementById('center-popup');
-    if (!popup.contains(event.target) && !event.target.closest('.grid-image')) {
-        hideCenterPopup();
-    }
-}
-
-// Re-attach hover and click event listeners
-document.querySelectorAll('.grid-image').forEach(image => {
-    image.addEventListener('mouseover', showHoverPopup);
-    image.addEventListener('mouseout', hideHoverPopup);
-    image.addEventListener('click', showCenterPopup);
-});
+document.getElementById('sort-options').addEventListener('change', sortAlbums);
+document.getElementById('tag-options').addEventListener('change', filterByTag);
+document.getElementById('grid-width').addEventListener('input', adjustGridWidth);
+document.getElementById('search-input').addEventListener('input', searchAlbums);
 
 // Toolbar hover logic
 const toolbar = document.getElementById('toolbar');
