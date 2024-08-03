@@ -133,3 +133,7 @@ header select, header input {
         grid-template-columns: 1fr;
     }
 }
+
+.select2-container {
+    width: auto !important;
+}

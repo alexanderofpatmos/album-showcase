@@ -80,16 +80,17 @@ function populateFilterOptions() {
     const filterSelect = document.getElementById('filter-tags');
     filterSelect.innerHTML = '';
 
-    const blankOption = document.createElement('option');
-    blankOption.value = '';
-    blankOption.text = '';
-    filterSelect.appendChild(blankOption);
-
     Array.from(tags).sort().forEach(tag => {
         const option = document.createElement('option');
         option.value = tag;
         option.text = tag;
         filterSelect.appendChild(option);
+    });
+
+    $(filterSelect).select2({
+        placeholder: "Select tags",
+        allowClear: true,
+        closeOnSelect: false
     });
 }
 
