@@ -9,38 +9,11 @@
 </head>
 <body>
     <header>
-<div class="toolbar">
-    <button id="openToolbar" style="font-family: 'Times New Roman', Times, serif; font-size: small;">Open Toolbar</button>
-    <button id="closeToolbar" style="font-family: 'Times New Roman', Times, serif; font-size: small;">Close Toolbar</button>
-    <label for="imageGridWidth" style="font-family: 'Times New Roman', Times, serif; font-size: small;">Grid Width:</label>
-    <select id="imageGridWidth" style="font-family: 'Times New Roman', Times, serif; font-size: small;">
-        <option value="4">4 Images Across</option>
-        <option value="5">5 Images Across</option>
-        <option value="6">6 Images Across</option>
-        <option value="7">7 Images Across</option>
-        <option value="8">8 Images Across</option>
-        <option value="9">9 Images Across</option>
-        <option value="10">10 Images Across</option>
-    </select>
-</div>
-
         <div class="header-content">
-            <h1 style="font-family: 'Times New Roman', Times, serif;">Alexander's Favorite Album Covers</h1>
-            <p class="site-description" style="font-family: 'Times New Roman', Times, serif;">Hello, my name is Alexander. I believe cover artwork is a very essential part of releasing a musical work, as it can influence how the listener may perceive the music. I created this website to catalog some of my favorite album covers.</p>
+            <h1>Alexander's Favorite Album Covers</h1>
+            <p class="site-description">Hello, my name is Alexander. I believe cover artwork is a very essential part of releasing a musical work, as it can influence how the listener may perceive the music. I created this website to catalog some of my favorite album covers.</p>
         </div>
-    
-        <div class="info-icon" onclick="toggleInfoPopup()">ℹ️</div>
     </header>
-    <div id="info-popup" class="popup">
-        <div class="popup-content">
-            <p>ABOUT THIS WEBSITE</p>
-            <p>Hello, my name is Alexander. I like album covers.</p>
-            <p>I believe cover artwork is a very essential part of releasing a work of music, because it may influence how the listener perceives the music they hear. I created this website to catalog some of my personal favorite album covers.</p>
-            <p>Note: I used ChatGPT to generate the code for this website. I know nothing about coding. I am hosting this website for free on GitHub Pages.</p>
-            <span class="close-popup" onclick="toggleInfoPopup()">X</span>
-        </div>
-    </div>
-
     <main>
         <div id="album-grid" class="album-grid">
             <!-- Album template to copy/paste for new albums -->

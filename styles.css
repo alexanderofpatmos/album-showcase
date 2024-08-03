@@ -203,15 +203,3 @@ footer #sort-order-btn {
 .select2-container .select2-selection--multiple .select2-selection__choice__remove {
     color: #f0f0f0;
 }
-
-body, h1, h2, h3, p, button, label, select {
-    font-family: 'Times New Roman', Times, serif;
-}
-
-.toolbar {
-    margin: 10px 0;
-}
-
-.toolbar button, .toolbar label, .toolbar select {
-    margin-right: 10px;
-}
