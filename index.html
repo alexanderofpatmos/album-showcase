@@ -9,18 +9,25 @@
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <h1>Alexander's Favorite Album Covers</h1>
-            <p class="site-description">Hello, my name is Alexander. I believe cover artwork is a very essential part of releasing a musical work, as it can influence how the listener may perceive the music. I created this website to catalog some of my favorite album covers.</p>
-        </div>
+        <h1>Alexander's Favorite Album Covers</h1>
+        <div class="info-icon" onclick="toggleInfoPopup()">ℹ️</div>
     </header>
+    <div id="info-popup" class="popup">
+        <div class="popup-content">
+            <p>About this website.</p>
+            <p>Hello, my name is Alexander. I like album covers.</p>
+            <p>I believe cover artwork is a very essential part of releasing a work of music, because it may influence how the listener perceives the music they hear. I created this website to catalog some of my personal favorite album covers.</p>
+            <p>Note: I know nothing about the art of coding. I used ChatGPT to generate the code for this website. I am hosting this website for free on GitHub Pages.</p>
+            <span class="close-popup" onclick="toggleInfoPopup()">X</span>
+        </div>
+    </div>
     <main>
         <div id="album-grid" class="album-grid">
             <!-- Album template to copy/paste for new albums -->
             <div class="album" data-title="Abbey Road" data-artist="The Beatles" data-date="1969-09-26" data-tags="#rock #classic #photograph">
-                <img src="https://i.imgur.com/Dnti25M.jpg" alt="Abbey Road" onclick="showPopup(this)">
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg" alt="Abbey Road" onclick="showPopup(this)">
                 <div class="popup">
-                    <img src="https://i.imgur.com/Dnti25M.jpg" alt="Abbey Road">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg" alt="Abbey Road">
                     <p><strong>Album:</strong> Abbey Road</p>
                     <p><strong>Artist:</strong> The Beatles</p>
                     <p><strong>Release Date:</strong> 1969-09-26</p>
@@ -57,9 +64,9 @@
         </div>
     </main>
     <footer>
-        <div class="bottom-banner">
-            <button onclick="toggleBottomBanner()" id="toggle-bottom-banner-btn">▼</button>
-            <div id="bottom-banner-content">
+        <div class="toolbar">
+            <button onclick="toggleToolbar()" id="toggle-toolbar-btn">▼ Open Toolbar</button>
+            <div id="toolbar-content">
                 <div class="controls">
                     <label for="sort-options">Sort by:</label>
                     <select id="sort-options" onchange="sortAlbums()">
