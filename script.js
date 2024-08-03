@@ -173,8 +173,20 @@ function hideCenterPopupOnClickOutside(event) {
     }
 }
 
+// Re-attach hover and click event listeners
 document.querySelectorAll('.grid-image').forEach(image => {
     image.addEventListener('mouseover', showHoverPopup);
     image.addEventListener('mouseout', hideHoverPopup);
     image.addEventListener('click', showCenterPopup);
+});
+
+// Toolbar hover logic
+const toolbar = document.getElementById('toolbar');
+document.body.addEventListener('mousemove', (event) => {
+    const toolbarRect = toolbar.getBoundingClientRect();
+    if (event.clientY >= window.innerHeight - toolbarRect.height) {
+        toolbar.classList.add('show');
+    } else {
+        toolbar.classList.remove('show');
+    }
 });
