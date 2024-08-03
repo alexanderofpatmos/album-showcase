@@ -9,17 +9,26 @@ header {
     color: white;
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 header h1 {
     margin: 0;
 }
 
+header .description {
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+
 header div {
     display: flex;
+    justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
 header label {
