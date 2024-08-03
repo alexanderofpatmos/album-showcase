@@ -9,40 +9,55 @@ body {
 header {
     background-color: #444;
     color: #f0f0f0;
-    padding: 15px 30px;
+    padding: 10px 30px; /* Adjust padding to make the header thinner */
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    min-height: 120px; /* Ensure header remains the same size */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 header h1 {
-    font-size: 2em;
+    font-size: 1.5em;
     margin: 0;
 }
 
 header .site-description {
-    font-size: 1em;
-    margin: 10px 0;
-    max-width: 800px;
+    font-size: 0.9em;
+    margin: 5px 0 0 0;
+    max-width: 400px;
+}
+
+header .left-half {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+header .right-half {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 header div {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 header label {
-    margin-right: 15px;
+    margin-right: 10px;
     font-weight: bold;
 }
 
 header select, header input {
-    margin-right: 20px;
-    padding: 10px;
+    margin-right: 10px;
+    padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #555;
@@ -61,7 +76,7 @@ header select, header input {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-    padding: 20px;
+    padding: 80px 20px 20px 20px; /* Add padding at the top to prevent overlap with fixed header */
 }
 
 .album {

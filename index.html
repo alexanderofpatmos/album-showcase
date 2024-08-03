@@ -9,20 +9,26 @@
 </head>
 <body>
     <header>
-        <h1>Alexander's Favorite Album Covers</h1>
-        <p class="site-description">Hello, my name is Alexander. I believe cover artwork is a very essential part of releasing a musical work, as it can influence how the listener may perceive the music. I created this website to catalog some of my favorite album covers.</p>
-        <div>
-            <label for="sort-options">Sort by:</label>
-            <select id="sort-options" onchange="sortAlbums()">
-                <option value="title">Album Title (A-Z)</option>
-                <option value="artist">Artist Name (A-Z)</option>
-                <option value="date">Release Date (Oldest-Newest)</option>
-            </select>
-            <button onclick="toggleSortOrder()" id="sort-order-btn">↑</button>
-            <label for="filter-tags">Filter by tag:</label>
-            <select id="filter-tags" multiple="multiple">
-                <!-- Options will be populated dynamically -->
-            </select>
+        <div class="left-half">
+            <h1>Alexander's Favorite Album Covers</h1>
+            <p class="site-description">Hello, my name is Alexander. I believe cover artwork is a very essential part of releasing a musical work, as it can influence how the listener may perceive the music. I created this website to catalog some of my favorite album covers.</p>
+        </div>
+        <div class="right-half">
+            <div>
+                <label for="sort-options">Sort by:</label>
+                <select id="sort-options" onchange="sortAlbums()">
+                    <option value="title">Album Title (A-Z)</option>
+                    <option value="artist">Artist Name (A-Z)</option>
+                    <option value="date">Release Date (Oldest-Newest)</option>
+                </select>
+                <button onclick="toggleSortOrder()" id="sort-order-btn">↑</button>
+            </div>
+            <div>
+                <label for="filter-tags">Filter by tag:</label>
+                <select id="filter-tags" multiple="multiple">
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
         </div>
     </header>
     <main>
