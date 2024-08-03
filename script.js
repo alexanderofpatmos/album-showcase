@@ -172,3 +172,9 @@ function hideCenterPopupOnClickOutside(event) {
         hideCenterPopup();
     }
 }
+
+document.querySelectorAll('.grid-image').forEach(image => {
+    image.addEventListener('mouseover', showHoverPopup);
+    image.addEventListener('mouseout', hideHoverPopup);
+    image.addEventListener('click', showCenterPopup);
+});
