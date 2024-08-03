@@ -14,7 +14,7 @@
             <p class="site-description">Hello, my name is Alexander. I believe cover artwork is a very essential part of releasing a musical work, as it can influence how the listener may perceive the music. I created this website to catalog some of my favorite album covers.</p>
         </div>
         <div class="right-half">
-            <div>
+            <div class="controls">
                 <label for="sort-options">Sort by:</label>
                 <select id="sort-options" onchange="sortAlbums()">
                     <option value="title">Album Title (A-Z)</option>
@@ -23,11 +23,15 @@
                 </select>
                 <button onclick="toggleSortOrder()" id="sort-order-btn">↑</button>
             </div>
-            <div>
+            <div class="controls">
                 <label for="filter-tags">Filter by tag:</label>
                 <select id="filter-tags" multiple="multiple">
                     <!-- Options will be populated dynamically -->
                 </select>
+            </div>
+            <div class="controls">
+                <label for="search-bar">Search:</label>
+                <input type="text" id="search-bar" onkeyup="searchAlbums()" placeholder="Search albums...">
             </div>
         </div>
     </header>

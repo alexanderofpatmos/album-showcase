@@ -51,6 +51,20 @@ function filterAlbums() {
     });
 }
 
+function searchAlbums() {
+    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+    const albums = document.getElementsByClassName('album');
+
+    Array.from(albums).forEach(album => {
+        const title = album.getAttribute('data-title').toLowerCase();
+        const artist = album.getAttribute('data-artist').toLowerCase();
+        const date = album.getAttribute('data-date').toLowerCase();
+        const tags = album.getAttribute('data-tags').toLowerCase();
+        const match = title.includes(searchTerm) || artist.includes(searchTerm) || date.includes(searchTerm) || tags.includes(searchTerm);
+        album.style.display = match ? 'block' : 'none';
+    });
+}
+
 function showPopup(element) {
     const popup = element.nextElementSibling;
     popup.style.display = 'block';

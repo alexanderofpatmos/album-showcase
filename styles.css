@@ -44,7 +44,7 @@ header .right-half {
     align-items: flex-end;
 }
 
-header div {
+header .controls {
     display: flex;
     align-items: center;
     margin-top: 5px;
@@ -60,7 +60,7 @@ header select, header input {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    background-color: #555;
+    background-color: #555; /* Darken the background */
     color: #f0f0f0;
 }
 
@@ -70,6 +70,7 @@ header select, header input {
     color: #f0f0f0;
     font-size: 1.2em;
     cursor: pointer;
+    margin-left: 5px; /* Ensure the arrow is next to the sort box */
 }
 
 .album-grid {
@@ -151,4 +152,18 @@ header select, header input {
 
 .select2-container {
     width: auto !important;
+}
+
+.select2-container .select2-selection--multiple {
+    background-color: #555; /* Darken the background */
+    color: #f0f0f0;
+}
+
+.select2-container .select2-selection--multiple .select2-selection__choice {
+    background-color: #666; /* Darken the background */
+    color: #f0f0f0;
+}
+
+.select2-container .select2-selection--multiple .select2-selection__choice__remove {
+    color: #f0f0f0;
 }
