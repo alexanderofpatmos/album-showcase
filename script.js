@@ -82,32 +82,48 @@ function hidePopup(element) {
 }
 
 function populateFilterOptions() {
-    const albums = document.getElementsByClassName('album');
-    const tags = new Set();
-
-    Array.from(albums).forEach(album => {
-        album.getAttribute('data-tags').toLowerCase().split(' ').forEach(tag => {
-            tags.add(tag.replace('#', ''));
+    function populateFilterOptions() {
+        const albums = document.getElementsByClassName('album');
+        const tags = new Set();
+    
+        Array.from(albums).forEach(album => {
+            album.getAttribute('data-tags').toLowerCase().split(' ').forEach(tag => {
+                tags.add(tag.replace('#', ''));
+            });
         });
-    });
-
-    const filterSelect = document.getElementById('filter-tags');
-    filterSelect.innerHTML = '';
-
-    Array.from(tags).sort().forEach(tag => {
-        const option = document.createElement('option');
-        option.value = tag;
-        option.text = tag;
-        filterSelect.appendChild(option);
-    });
-
-    $(filterSelect).select2({
-        placeholder: "Select tags",
-        allowClear: true,
-        closeOnSelect: false,
-        dropdownCssClass: 'dark-dropdown' // Add this line to apply dark theme
-    });
-}
+    
+        const filterSelect = document.getElementById('filter-tags');
+        filterSelect.innerHTML = '';
+    
+        Array.from(tags).sort().forEach(tag => {
+            const option = document.createElement('option');
+            option.value = tag;
+            option.text = tag;
+            filterSelect.appendChild(option);
+        });
+    
+        $(filterSelect).select2({
+            placeholder: "Select tags",
+            allowClear: true,
+            closeOnSelect: false,
+            dropdownCssClass: 'dark-dropdown'
+        });
+    
+        // Add event listener to filter albums on change
+        $('#filter-tags').on('change', filterAlbums);
+    }
+    
+    function filterAlbums() {
+        const selectedOptions = $('#filter-tags').val().map(option => option.toLowerCase());
+        const albums = document.getElementsByClassName('album');
+    
+        Array.from(albums).forEach(album => {
+            const tags = album.getAttribute('data-tags').toLowerCase().split(' ');
+            const match = selectedOptions.length === 0 || selectedOptions.every(filter => tags.includes(`#${filter}`));
+            album.style.display = match ? 'block' : 'none';
+        });
+    }
+    
 
 function toggleToolbar() {
     const toolbarContent = document.getElementById('toolbar-content');
