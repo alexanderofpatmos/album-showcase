@@ -130,21 +130,45 @@ function toggleToolbar() {
 }
 
 function toggleInfoPopup() {
-    const infoPopup = document.getElementById('info-popup');
-    if (infoPopup.style.display === 'none' || infoPopup.style.display === '') {
-        infoPopup.style.display = 'block';
-    } else {
-        infoPopup.style.display = 'none';
+    const popup = document.getElementById('info-popup');
+    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+}
+
+function showHoverPopup(event) {
+    const popup = document.getElementById('hover-popup');
+    const content = document.getElementById('hover-popup-content');
+    const album = event.target.closest('.album');
+    content.textContent = `Title: ${album.getAttribute('data-title')}\nArtist: ${album.getAttribute('data-artist')}\nDate: ${album.getAttribute('data-date')}`;
+    
+    popup.style.left = `${event.pageX + 10}px`;
+    popup.style.top = `${event.pageY + 10}px`;
+    popup.style.display = 'block';
+}
+
+function hideHoverPopup() {
+    const popup = document.getElementById('hover-popup');
+    popup.style.display = 'none';
+}
+
+function showCenterPopup(event) {
+    const popup = document.getElementById('center-popup');
+    const content = document.getElementById('center-popup-content');
+    const album = event.target.closest('.album');
+    content.textContent = `Title: ${album.getAttribute('data-title')}\nArtist: ${album.getAttribute('data-artist')}\nDate: ${album.getAttribute('data-date')}`;
+    
+    popup.style.display = 'block';
+    document.addEventListener('click', hideCenterPopupOnClickOutside);
+}
+
+function hideCenterPopup() {
+    const popup = document.getElementById('center-popup');
+    popup.style.display = 'none';
+    document.removeEventListener('click', hideCenterPopupOnClickOutside);
+}
+
+function hideCenterPopupOnClickOutside(event) {
+    const popup = document.getElementById('center-popup');
+    if (!popup.contains(event.target) && !event.target.closest('.grid-image')) {
+        hideCenterPopup();
     }
 }
-
-function updateGridWidth(value) {
-    const grid = document.getElementById('album-grid');
-    grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    populateFilterOptions();
-    sortAlbums(); // Default sorting by album title (A-Z)
-    toggleToolbar(); // Ensure toolbar is closed by default
-});
