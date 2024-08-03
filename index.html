@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Cover Showcase</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Album Cover Showcase</h1>
+        <div>
+            <label for="sort-options">Sort by:</label>
+            <select id="sort-options" onchange="sortAlbums()">
+                <option value="title">Album Title (A-Z)</option>
+                <option value="title-reverse">Album Title (Z-A)</option>
+                <option value="artist">Artist Name (A-Z)</option>
+                <option value="artist-reverse">Artist Name (Z-A)</option>
+                <option value="date">Release Date (Oldest-Newest)</option>
+                <option value="date-reverse">Release Date (Newest-Oldest)</option>
+            </select>
+            <label for="filter-tags">Filter by tag:</label>
+            <input type="text" id="filter-tags" onkeyup="filterAlbums()" placeholder="Enter tag">
+        </div>
+    </header>
+    <main>
+        <div id="album-grid" class="album-grid">
+            <!-- Album template to copy/paste for new albums -->
+            <div class="album" data-title="Abbey Road" data-artist="The Beatles" data-date="1969-09-26" data-tags="#rock #classic #photograph">
+                <img src="https://i.imgur.com/1.jpg" alt="Abbey Road">
+                <div class="popup">
+                    <img src="https://i.imgur.com/1.jpg" alt="Abbey Road">
+                    <p><strong>Album:</strong> Abbey Road</p>
+                    <p><strong>Artist:</strong> The Beatles</p>
+                    <p><strong>Release Date:</strong> 1969-09-26</p>
+                    <p><strong>Tags:</strong> #rock #classic #photograph</p>
+                    <p><strong>Notes:</strong> One of the most famous album covers ever.</p>
+                </div>
+            </div>
+            <div class="album" data-title="Dark Side of the Moon" data-artist="Pink Floyd" data-date="1973-03-01" data-tags="#rock #progressive #minimal">
+                <img src="https://i.imgur.com/2.jpg" alt="Dark Side of the Moon">
+                <div class="popup">
+                    <img src="https://i.imgur.com/2.jpg" alt="Dark Side of the Moon">
+                    <p><strong>Album:</strong> Dark Side of the Moon</p>
+                    <p><strong>Artist:</strong> Pink Floyd</p>
+                    <p><strong>Release Date:</strong> 1973-03-01</p>
+                    <p><strong>Tags:</strong> #rock #progressive #minimal</p>
+                    <p><strong>Notes:</strong> Iconic prism design.</p>
+                </div>
+            </div>
+            <div class="album" data-title="Thriller" data-artist="Michael Jackson" data-date="1982-11-30" data-tags="#pop #80s #iconic">
+                <img src="https://i.imgur.com/3.jpg" alt="Thriller">
+                <div class="popup">
+                    <img src="https://i.imgur.com/3.jpg" alt="Thriller">
+                    <p><strong>Album:</strong> Thriller</p>
+                    <p><strong>Artist:</strong> Michael Jackson</p>
+                    <p><strong>Release Date:</strong> 1982-11-30</p>
+                    <p><strong>Tags:</strong> #pop #80s #iconic</p>
+                    <p><strong>Notes:</strong> Best-selling album of all time.</p>
+                </div>
+            </div>
+            <!-- End of template -->
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
