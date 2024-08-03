@@ -29,23 +29,4 @@ function sortAlbums() {
             case 'date-reverse':
                 aValue = a.getAttribute('data-date');
                 bValue = b.getAttribute('data-date');
-                return new Date(bValue) - new Date(aValue);
-        }
-    });
-
-    albums.forEach(album => grid.appendChild(album));
-}
-
-function filterAlbums() {
-    const filter = document.getElementById('filter-tags').value.toLowerCase();
-    const albums = document.getElementsByClassName('album');
-
-    Array.from(albums).forEach(album => {
-        const tags = album.getAttribute('data-tags').toLowerCase();
-        if (tags.includes(filter)) {
-            album.style.display = 'block';
-        } else {
-            album.style.display = 'none';
-        }
-    });
-}
+                return new Date(bValue
