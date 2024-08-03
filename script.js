@@ -46,7 +46,7 @@ function filterAlbums() {
 
     Array.from(albums).forEach(album => {
         const tags = album.getAttribute('data-tags').toLowerCase().split(' ');
-        const match = selectedOptions.every(filter => tags.includes(`#${filter}`));
+        const match = selectedOptions.length === 0 || selectedOptions.every(filter => tags.includes(`#${filter}`));
         album.style.display = match ? 'block' : 'none';
     });
 }
@@ -79,6 +79,11 @@ function populateFilterOptions() {
 
     const filterSelect = document.getElementById('filter-tags');
     filterSelect.innerHTML = '';
+
+    const blankOption = document.createElement('option');
+    blankOption.value = '';
+    blankOption.text = '';
+    filterSelect.appendChild(blankOption);
 
     Array.from(tags).sort().forEach(tag => {
         const option = document.createElement('option');
