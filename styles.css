@@ -41,12 +41,20 @@ header label {
 }
 
 header select, header input {
-    margin-right: 30px;
+    margin-right: 20px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #555;
     color: #f0f0f0;
+}
+
+#sort-order-btn {
+    background: none;
+    border: none;
+    color: #f0f0f0;
+    font-size: 1.2em;
+    cursor: pointer;
 }
 
 .album-grid {

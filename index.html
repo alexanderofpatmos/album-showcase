@@ -14,14 +14,12 @@
             <label for="sort-options">Sort by:</label>
             <select id="sort-options" onchange="sortAlbums()">
                 <option value="title">Album Title (A-Z)</option>
-                <option value="title-reverse">Album Title (Z-A)</option>
                 <option value="artist">Artist Name (A-Z)</option>
-                <option value="artist-reverse">Artist Name (Z-A)</option>
                 <option value="date">Release Date (Oldest-Newest)</option>
-                <option value="date-reverse">Release Date (Newest-Oldest)</option>
             </select>
+            <button onclick="toggleSortOrder()" id="sort-order-btn">↑</button>
             <label for="filter-tags">Filter by tag:</label>
-            <select id="filter-tags" onchange="filterAlbums()" multiple>
+            <select id="filter-tags" multiple onchange="filterAlbums()">
                 <!-- Options will be populated dynamically -->
             </select>
         </div>

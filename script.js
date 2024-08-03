@@ -1,3 +1,5 @@
+let sortOrderAsc = true; // To track the current sort order
+
 function sortAlbums() {
     const grid = document.getElementById('album-grid');
     const albums = Array.from(grid.getElementsByClassName('album'));
@@ -10,28 +12,20 @@ function sortAlbums() {
                 aValue = a.getAttribute('data-title').toLowerCase();
                 bValue = b.getAttribute('data-title').toLowerCase();
                 return aValue.localeCompare(bValue);
-            case 'title-reverse':
-                aValue = a.getAttribute('data-title').toLowerCase();
-                bValue = b.getAttribute('data-title').toLowerCase();
-                return bValue.localeCompare(aValue);
             case 'artist':
                 aValue = a.getAttribute('data-artist').toLowerCase();
                 bValue = b.getAttribute('data-artist').toLowerCase();
                 return aValue.localeCompare(bValue);
-            case 'artist-reverse':
-                aValue = a.getAttribute('data-artist').toLowerCase();
-                bValue = b.getAttribute('data-artist').toLowerCase();
-                return bValue.localeCompare(aValue);
             case 'date':
                 aValue = new Date(a.getAttribute('data-date'));
                 bValue = new Date(b.getAttribute('data-date'));
                 return aValue - bValue;
-            case 'date-reverse':
-                aValue = new Date(a.getAttribute('data-date'));
-                bValue = new Date(b.getAttribute('data-date'));
-                return bValue - aValue;
         }
     });
+
+    if (!sortOrderAsc) {
+        albums.reverse();
+    }
 
     // Clear the grid and append sorted albums
     while (grid.firstChild) {
@@ -40,13 +34,19 @@ function sortAlbums() {
     albums.forEach(album => grid.appendChild(album));
 }
 
+function toggleSortOrder() {
+    sortOrderAsc = !sortOrderAsc;
+    document.getElementById('sort-order-btn').textContent = sortOrderAsc ? '↑' : '↓';
+    sortAlbums();
+}
+
 function filterAlbums() {
     const selectedOptions = Array.from(document.getElementById('filter-tags').selectedOptions).map(option => option.value.toLowerCase());
     const albums = document.getElementsByClassName('album');
 
     Array.from(albums).forEach(album => {
         const tags = album.getAttribute('data-tags').toLowerCase().split(' ');
-        const match = selectedOptions.every(filter => tags.includes(filter));
+        const match = selectedOptions.every(filter => tags.includes(`#${filter}`));
         album.style.display = match ? 'block' : 'none';
     });
 }
@@ -73,7 +73,7 @@ function populateFilterOptions() {
 
     Array.from(albums).forEach(album => {
         album.getAttribute('data-tags').toLowerCase().split(' ').forEach(tag => {
-            tags.add(tag);
+            tags.add(tag.replace('#', ''));
         });
     });
 
@@ -90,4 +90,5 @@ function populateFilterOptions() {
 
 document.addEventListener('DOMContentLoaded', () => {
     populateFilterOptions();
+    sortAlbums(); // Default sorting by album title (A-Z)
 });
