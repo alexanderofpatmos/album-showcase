@@ -45,8 +45,9 @@ function filterAlbums() {
     const albums = document.getElementsByClassName('album');
 
     Array.from(albums).forEach(album => {
-        const tags = album.getAttribute('data-tags').toLowerCase().split(' ');
-        const match = selectedOptions.length === 0 || selectedOptions.every(filter => tags.includes(`#${filter}`));
+        const genres = album.getAttribute('data-genres').toLowerCase().split(' ');
+        const arts = album.getAttribute('data-art').toLowerCase().split(' ');
+        const match = selectedOptions.length === 0 || selectedOptions.every(filter => genres.includes(`#${filter}`) || arts.includes(`#${filter}`));
         album.style.display = match ? 'block' : 'none';
     });
 }
@@ -59,19 +60,23 @@ function searchAlbums() {
         const title = album.getAttribute('data-title').toLowerCase();
         const artist = album.getAttribute('data-artist').toLowerCase();
         const date = album.getAttribute('data-date').toLowerCase();
-        const tags = album.getAttribute('data-tags').toLowerCase();
-        const match = title.includes(searchTerm) || artist.includes(searchTerm) || date.includes(searchTerm) || tags.includes(searchTerm);
+        const genres = album.getAttribute('data-genres').toLowerCase();
+        const arts = album.getAttribute('data-art').toLowerCase();
+        const match = title.includes(searchTerm) || artist.includes(searchTerm) || date.includes(searchTerm) || genres.includes(searchTerm) || arts.includes(searchTerm);
         album.style.display = match ? 'block' : 'none';
     });
 }
 
 function showPopup(element) {
     const popup = element.nextElementSibling;
+    const allPopups = document.querySelectorAll('.popup');
+    allPopups.forEach(p => p.style.display = 'none'); // Hide all popups
     popup.style.display = 'block';
     popup.style.position = 'fixed';
     popup.style.top = '50%';
     popup.style.left = '50%';
     popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.width = '60%'; // Ensure larger size for clicked popup
     document.body.style.overflow = 'hidden';
 }
 
@@ -86,7 +91,10 @@ function populateFilterOptions() {
     const tags = new Set();
 
     Array.from(albums).forEach(album => {
-        album.getAttribute('data-tags').toLowerCase().split(' ').forEach(tag => {
+        album.getAttribute('data-genres').toLowerCase().split(' ').forEach(tag => {
+            tags.add(tag.replace('#', ''));
+        });
+        album.getAttribute('data-art').toLowerCase().split(' ').forEach(tag => {
             tags.add(tag.replace('#', ''));
         });
     });
@@ -128,6 +136,11 @@ function toggleInfoPopup() {
     } else {
         infoPopup.style.display = 'none';
     }
+}
+
+function updateGridWidth(value) {
+    const grid = document.getElementById('album-grid');
+    grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

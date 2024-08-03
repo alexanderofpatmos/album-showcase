@@ -80,8 +80,9 @@ footer {
     background: none;
     border: none;
     color: #f0f0f0;
-    font-size: 1.2em;
+    font-size: 0.9em; /* Adjusted to match the size of other toolbar text */
     cursor: pointer;
+    font-family: 'Times New Roman', serif; /* Ensure Times New Roman */
 }
 
 #toolbar-content {
@@ -99,6 +100,7 @@ footer .controls {
 footer label {
     margin-right: 10px;
     font-weight: bold;
+    font-family: 'Times New Roman', serif; /* Ensure Times New Roman */
 }
 
 footer select, footer input {
@@ -108,6 +110,7 @@ footer select, footer input {
     border: 1px solid #ccc;
     background-color: #555; /* Darken the background */
     color: #f0f0f0;
+    font-family: 'Times New Roman', serif; /* Ensure Times New Roman */
 }
 
 footer select#filter-tags {
@@ -144,7 +147,7 @@ footer #sort-order-btn {
 
 .album-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr); /* Default grid width, controlled via JavaScript */
     gap: 10px;
     padding: 20px;
     padding-bottom: 60px; /* Add padding at the bottom to prevent overlap with fixed footer */
@@ -194,6 +197,11 @@ footer #sort-order-btn {
 
 .album:hover .popup {
     display: block;
+    position: absolute;
+    width: 300px; /* Smaller version for hovering */
+    left: 100%; /* Position next to the album image */
+    transform: translateX(10px);
+    top: 0;
 }
 
 @media (max-width: 1200px) {
