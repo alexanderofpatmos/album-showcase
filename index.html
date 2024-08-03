@@ -14,7 +14,7 @@
     </header>
     <div id="info-popup" class="popup">
         <div class="popup-content">
-            <p>About this website.</p>
+            <p>ABOUT THIS WEBSITE</p>
             <p>Hello, my name is Alexander. I like album covers.</p>
             <p>I believe cover artwork is a very essential part of releasing a work of music, because it may influence how the listener perceives the music they hear. I created this website to catalog some of my personal favorite album covers.</p>
             <p>Note: I used ChatGPT to generate the code for this website. I am hosting this website for free on GitHub Pages.</p>
@@ -25,9 +25,9 @@
         <div id="album-grid" class="album-grid">
             <!-- Album template to copy/paste for new albums -->
             <div class="album" data-title="Abbey Road" data-artist="The Beatles" data-date="1969-09-26" data-genres="#rock #classic" data-art="#photograph">
-                <img src="https://i.imgur.com/Dnti25M.jpg" alt="Abbey Road" onclick="showPopup(this)">
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg?20230207113016g" alt="Abbey Road" onclick="showPopup(this)">
                 <div class="popup">
-                    <img src="https://i.imgur.com/Dnti25M.jpg" alt="Abbey Road">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg?20230207113016" alt="Abbey Road">
                     <p><strong>Album:</strong> Abbey Road</p>
                     <p><strong>Artist:</strong> The Beatles</p>
                     <p><strong>Release Date:</strong> 1969-09-26</p>
@@ -50,6 +50,19 @@
                     <span class="close-popup" onclick="hidePopup(this)">X</span>
                 </div>
             </div>
+            <div class="album" data-title="Rumours" data-artist="Fleetwood Mac data-date="1977-02-04" data-genres="#softrock" data-art="#photograph">
+                <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG" alt="Rumours" onclick="showPopup(this)">
+                <div class="popup">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG" alt="Rumours">
+                    <p><strong>Album:</strong> Rumours</p>
+                    <p><strong>Artist:</strong> Fleetwood Mac</p>
+                    <p><strong>Release Date:</strong> 1977-02-04</p>
+                    <p><strong>Notes:</strong> My mother's favorite band.</p>
+                    <p><strong>Genre Tags:</strong> #softrock</p>
+                    <p><strong>Art Tags:</strong> #photograph</p>
+                    <span class="close-popup" onclick="hidePopup(this)">X</span>
+                </div>
+            </div>           
             <div class="album" data-title="Thriller" data-artist="Michael Jackson" data-date="1982-11-30" data-genres="#pop #80s" data-art="#iconic">
                 <img src="https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png" alt="Thriller" onclick="showPopup(this)">
                 <div class="popup">
