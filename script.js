@@ -18,7 +18,7 @@ function sortAlbums() {
                 return aValue.localeCompare(bValue);
             case 'date':
                 aValue = new Date(a.getAttribute('data-date'));
-                bValue = new Date(a.getAttribute('data-date'));
+                bValue = new Date(b.getAttribute('data-date'));
                 return aValue - bValue;
         }
     });
@@ -82,72 +82,95 @@ function hidePopup(element) {
 }
 
 function populateFilterOptions() {
-    function populateFilterOptions() {
-        const albums = document.getElementsByClassName('album');
-        const tags = new Set();
-    
-        Array.from(albums).forEach(album => {
-            album.getAttribute('data-tags').toLowerCase().split(' ').forEach(tag => {
-                tags.add(tag.replace('#', ''));
-            });
-        });
-    
-        const filterSelect = document.getElementById('filter-tags');
-        filterSelect.innerHTML = '';
-    
-        Array.from(tags).sort().forEach(tag => {
-            const option = document.createElement('option');
-            option.value = tag;
-            option.text = tag;
-            filterSelect.appendChild(option);
-        });
-    
-        $(filterSelect).select2({
-            placeholder: "Select tags",
-            allowClear: true,
-            closeOnSelect: false,
-            dropdownCssClass: 'dark-dropdown'
-        });
-    
-        // Add event listener to filter albums on change
-        $('#filter-tags').on('change', filterAlbums);
-    }
-    
-    function filterAlbums() {
-        const selectedOptions = $('#filter-tags').val().map(option => option.toLowerCase());
-        const albums = document.getElementsByClassName('album');
-    
-        Array.from(albums).forEach(album => {
-            const tags = album.getAttribute('data-tags').toLowerCase().split(' ');
-            const match = selectedOptions.length === 0 || selectedOptions.every(filter => tags.includes(`#${filter}`));
-            album.style.display = match ? 'block' : 'none';
-        });
-    }
-    
+    const albums = document.getElementsByClassName('album');
+    const tags = new Set();
 
-function toggleToolbar() {
-    const toolbarContent = document.getElementById('toolbar-content');
-    const toggleBtn = document.getElementById('toggle-toolbar-btn');
-    if (toolbarContent.style.display === 'none') {
-        toolbarContent.style.display = 'flex';
-        toggleBtn.textContent = '▼ Close Toolbar';
-    } else {
-        toolbarContent.style.display = 'none';
-        toggleBtn.textContent = '▲ Open Toolbar';
-    }
+    Array.from(albums).forEach(album => {
+        album.getAttribute('data-tags').toLowerCase().split(' ').forEach(tag => {
+            tags.add(tag.replace('#', ''));
+        });
+    });
+
+    const filterSelect = document.getElementById('filter-tags');
+    filterSelect.innerHTML = '';
+
+    Array.from(tags).sort().forEach(tag => {
+        const option = document.createElement('option');
+        option.value = tag;
+        option.text = tag;
+        filterSelect.appendChild(option);
+    });
+
+    $(filterSelect).select2({
+        placeholder: "Select tags",
+        allowClear: true,
+        closeOnSelect: false
+    });
 }
 
-function toggleInfoPopup() {
-    const infoPopup = document.getElementById('info-popup');
-    if (infoPopup.style.display === 'none' || infoPopup.style.display === '') {
-        infoPopup.style.display = 'block';
+function toggleBottomBanner() {
+    const bottomBannerContent = document.getElementById('bottom-banner-content');
+    const toggleBtn = document.getElementById('toggle-bottom-banner-btn');
+    if (bottomBannerContent.style.display === 'none') {
+        bottomBannerContent.style.display = 'flex';
+        toggleBtn.textContent = '▼';
     } else {
-        infoPopup.style.display = 'none';
+        bottomBannerContent.style.display = 'none';
+        toggleBtn.textContent = '▲';
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     populateFilterOptions();
     sortAlbums(); // Default sorting by album title (A-Z)
-    toggleToolbar(); // Ensure toolbar is closed by default
+});
+
+document.getElementById('openToolbar').addEventListener('click', function() {
+    document.querySelector('.toolbar').style.display = 'block';
+});
+
+document.getElementById('closeToolbar').addEventListener('click', function() {
+    document.querySelector('.toolbar').style.display = 'none';
+});
+
+document.getElementById('imageGridWidth').addEventListener('change', function() {
+    const gridWidth = this.value;
+    document.querySelector('.image-grid').style.gridTemplateColumns = `repeat(${gridWidth}, 1fr)`;
+});
+
+const images = document.querySelectorAll('.image-grid img');
+images.forEach(image => {
+    image.addEventListener('mouseover', function() {
+        const popup = document.createElement('div');
+        popup.className = 'hover-popup';
+        popup.innerHTML = this.alt;
+        document.body.appendChild(popup);
+        const rect = this.getBoundingClientRect();
+        popup.style.top = `${rect.top + window.scrollY}px`;
+        popup.style.left = `${rect.left + window.scrollX + rect.width}px`;
+        this.addEventListener('mouseout', function() {
+            popup.remove();
+        });
+    });
+
+    image.addEventListener('click', function() {
+        const popup = document.createElement('div');
+        popup.className = 'click-popup';
+        popup.innerHTML = this.alt;
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = 'X';
+        closeBtn.className = 'close-popup';
+        closeBtn.addEventListener('click', function() {
+            popup.remove();
+        });
+        popup.appendChild(closeBtn);
+        document.body.appendChild(popup);
+        popup.style.top = `${window.innerHeight / 2 - popup.offsetHeight / 2}px`;
+        popup.style.left = `${window.innerWidth / 2 - popup.offsetWidth / 2}px`;
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                popup.remove();
+            }
+        });
+    });
 });

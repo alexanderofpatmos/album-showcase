@@ -10,9 +10,6 @@ header {
     background-color: #444;
     color: #f0f0f0;
     padding: 5px 30px; /* Adjust padding to make the header thinner */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -22,36 +19,11 @@ header h1 {
     margin: 0;
 }
 
-.info-icon {
-    font-size: 1.5em;
-    cursor: pointer;
-}
-
-#info-popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    background-color: #666;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 10;
-    color: #f0f0f0;
-}
-
-#info-popup .popup-content {
-    text-align: left;
-}
-
-#info-popup .close-popup {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 1.5em;
+header .site-description {
+    font-size: 0.8em;
+    margin: 5px 0 0 0;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 footer {
@@ -69,14 +41,14 @@ footer {
     z-index: 1000;
 }
 
-.toolbar {
+.bottom-banner {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
 
-#toggle-toolbar-btn {
+#toggle-bottom-banner-btn {
     background: none;
     border: none;
     color: #f0f0f0;
@@ -84,10 +56,9 @@ footer {
     cursor: pointer;
 }
 
-#toolbar-content {
+#bottom-banner-content {
     display: flex;
     align-items: center;
-    padding: 5px 0; /* Make the toolbar content thinner */
 }
 
 footer .controls {
@@ -111,7 +82,7 @@ footer select, footer input {
 }
 
 footer select#filter-tags {
-    width: 250px; /* Make the filter box wider */
+    width: 200px; /* Make the filter box wider */
 }
 
 footer .select2-container--default .select2-selection--multiple {
@@ -125,11 +96,6 @@ footer .select2-container--default .select2-selection--multiple .select2-selecti
 }
 
 footer .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: #f0f0f0;
-}
-
-footer .select2-container--default .select2-dropdown {
-    background-color: #555; /* Darken the dropdown background */
     color: #f0f0f0;
 }
 
@@ -236,4 +202,16 @@ footer #sort-order-btn {
 
 .select2-container .select2-selection--multiple .select2-selection__choice__remove {
     color: #f0f0f0;
+}
+
+body, h1, h2, h3, p, button, label, select {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.toolbar {
+    margin: 10px 0;
+}
+
+.toolbar button, .toolbar label, .toolbar select {
+    margin-right: 10px;
 }
