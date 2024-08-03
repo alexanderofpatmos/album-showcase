@@ -133,4 +133,5 @@ function toggleInfoPopup() {
 document.addEventListener('DOMContentLoaded', () => {
     populateFilterOptions();
     sortAlbums(); // Default sorting by album title (A-Z)
+    toggleToolbar(); // Ensure toolbar is closed by default
 });
