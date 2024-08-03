@@ -108,6 +108,18 @@ function populateFilterOptions() {
     });
 }
 
+function toggleBottomBanner() {
+    const bottomBannerContent = document.getElementById('bottom-banner-content');
+    const toggleBtn = document.getElementById('toggle-bottom-banner-btn');
+    if (bottomBannerContent.style.display === 'none') {
+        bottomBannerContent.style.display = 'flex';
+        toggleBtn.textContent = '▼';
+    } else {
+        bottomBannerContent.style.display = 'none';
+        toggleBtn.textContent = '▲';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     populateFilterOptions();
     sortAlbums(); // Default sorting by album title (A-Z)

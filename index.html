@@ -58,24 +58,27 @@
     </main>
     <footer>
         <div class="bottom-banner">
-            <div class="controls">
-                <label for="sort-options">Sort by:</label>
-                <select id="sort-options" onchange="sortAlbums()">
-                    <option value="title">Album Title (A-Z)</option>
-                    <option value="artist">Artist Name (A-Z)</option>
-                    <option value="date">Release Date (Oldest-Newest)</option>
-                </select>
-                <button onclick="toggleSortOrder()" id="sort-order-btn">↑</button>
-            </div>
-            <div class="controls">
-                <label for="filter-tags">Filter by tag:</label>
-                <select id="filter-tags" multiple="multiple">
-                    <!-- Options will be populated dynamically -->
-                </select>
-            </div>
-            <div class="controls">
-                <label for="search-bar">Search:</label>
-                <input type="text" id="search-bar" onkeyup="searchAlbums()" placeholder="Search albums...">
+            <button onclick="toggleBottomBanner()" id="toggle-bottom-banner-btn">▼</button>
+            <div id="bottom-banner-content">
+                <div class="controls">
+                    <label for="sort-options">Sort by:</label>
+                    <select id="sort-options" onchange="sortAlbums()">
+                        <option value="title">Album Title (A-Z)</option>
+                        <option value="artist">Artist Name (A-Z)</option>
+                        <option value="date">Release Date (Oldest-Newest)</option>
+                    </select>
+                    <button onclick="toggleSortOrder()" id="sort-order-btn">↑</button>
+                </div>
+                <div class="controls">
+                    <label for="filter-tags">Filter by tag:</label>
+                    <select id="filter-tags" multiple="multiple">
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+                <div class="controls">
+                    <label for="search-bar">Search:</label>
+                    <input type="text" id="search-bar" onkeyup="searchAlbums()" placeholder="Search albums...">
+                </div>
             </div>
         </div>
     </footer>
