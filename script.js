@@ -7,42 +7,46 @@ function sortAlbums() {
         let aValue, bValue;
         switch (sortOption) {
             case 'title':
-                aValue = a.getAttribute('data-title');
-                bValue = b.getAttribute('data-title');
+                aValue = a.getAttribute('data-title').toLowerCase();
+                bValue = b.getAttribute('data-title').toLowerCase();
                 return aValue.localeCompare(bValue);
             case 'title-reverse':
-                aValue = a.getAttribute('data-title');
-                bValue = b.getAttribute('data-title');
+                aValue = a.getAttribute('data-title').toLowerCase();
+                bValue = b.getAttribute('data-title').toLowerCase();
                 return bValue.localeCompare(aValue);
             case 'artist':
-                aValue = a.getAttribute('data-artist');
-                bValue = b.getAttribute('data-artist');
+                aValue = a.getAttribute('data-artist').toLowerCase();
+                bValue = b.getAttribute('data-artist').toLowerCase();
                 return aValue.localeCompare(bValue);
             case 'artist-reverse':
-                aValue = a.getAttribute('data-artist');
-                bValue = b.getAttribute('data-artist');
+                aValue = a.getAttribute('data-artist').toLowerCase();
+                bValue = b.getAttribute('data-artist').toLowerCase();
                 return bValue.localeCompare(aValue);
             case 'date':
-                aValue = a.getAttribute('data-date');
-                bValue = b.getAttribute('data-date');
-                return new Date(aValue) - new Date(bValue);
+                aValue = new Date(a.getAttribute('data-date'));
+                bValue = new Date(b.getAttribute('data-date'));
+                return aValue - bValue;
             case 'date-reverse':
-                aValue = a.getAttribute('data-date');
-                bValue = b.getAttribute('data-date');
-                return new Date(bValue) - new Date(aValue);
+                aValue = new Date(a.getAttribute('data-date'));
+                bValue = new Date(b.getAttribute('data-date'));
+                return bValue - aValue;
         }
     });
 
+    // Clear the grid and append sorted albums
+    while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
     albums.forEach(album => grid.appendChild(album));
 }
 
 function filterAlbums() {
-    const filter = Array.from(document.getElementById('filter-tags').selectedOptions).map(option => option.value.toLowerCase());
+    const selectedOptions = Array.from(document.getElementById('filter-tags').selectedOptions).map(option => option.value.toLowerCase());
     const albums = document.getElementsByClassName('album');
 
     Array.from(albums).forEach(album => {
-        const tags = album.getAttribute('data-tags').toLowerCase();
-        const match = filter.some(f => tags.includes(f));
+        const tags = album.getAttribute('data-tags').toLowerCase().split(' ');
+        const match = selectedOptions.every(filter => tags.includes(filter));
         album.style.display = match ? 'block' : 'none';
     });
 }
