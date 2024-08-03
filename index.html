@@ -12,9 +12,9 @@
         <h1>Alexander's Favorite Album Covers</h1>
         <div class="info-icon" onclick="toggleInfoPopup()">ℹ️</div>
     </header>
-    <div id="info-popup" class="popup">
+    <div id="info-popup" class="popup center-popup">
         <div class="popup-content">
-            <p>ABOUT THIS WEBSITE</p>
+            <p>About this website.</p>
             <p>Hello, my name is Alexander. I like album covers.</p>
             <p>I believe cover artwork is a very essential part of releasing a work of music, because it may influence how the listener perceives the music they hear. I created this website to catalog some of my personal favorite album covers.</p>
             <p>Note: I used ChatGPT to generate the code for this website. I am hosting this website for free on GitHub Pages.</p>
@@ -25,9 +25,18 @@
         <div id="album-grid" class="album-grid">
             <!-- Album template to copy/paste for new albums -->
             <div class="album" data-title="Abbey Road" data-artist="The Beatles" data-date="1969-09-26" data-genres="#rock #classic" data-art="#photograph">
-                <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg?20230207113016g" alt="Abbey Road" onclick="showPopup(this)">
-                <div class="popup">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg?20230207113016" alt="Abbey Road">
+                <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg?20230207113016g" alt="Abbey Road" onmouseover="showHoverPopup(this)" onclick="showPopup(this)">
+                <div class="popup hover-popup">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg?20230207113016g" alt="Abbey Road">
+                    <p><strong>Album:</strong> Abbey Road</p>
+                    <p><strong>Artist:</strong> The Beatles</p>
+                    <p><strong>Release Date:</strong> 1969-09-26</p>
+                    <p><strong>Notes:</strong> One of the most famous album covers ever.</p>
+                    <p><strong>Genre Tags:</strong> #classic #rock</p>
+                    <p><strong>Art Tags:</strong> #photograph</p>
+                </div>
+                <div class="popup center-popup">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg?20230207113016g" alt="Abbey Road">
                     <p><strong>Album:</strong> Abbey Road</p>
                     <p><strong>Artist:</strong> The Beatles</p>
                     <p><strong>Release Date:</strong> 1969-09-26</p>
@@ -38,8 +47,17 @@
                 </div>
             </div>
             <div class="album" data-title="Dark Side of the Moon" data-artist="Pink Floyd" data-date="1973-03-01" data-genres="#rock #progressive" data-art="#minimal">
-                <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" alt="Dark Side of the Moon" onclick="showPopup(this)">
-                <div class="popup">
+                <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" alt="Dark Side of the Moon" onmouseover="showHoverPopup(this)" onclick="showPopup(this)">
+                <div class="popup hover-popup">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" alt="Dark Side of the Moon">
+                    <p><strong>Album:</strong> Dark Side of the Moon</p>
+                    <p><strong>Artist:</strong> Pink Floyd</p>
+                    <p><strong>Release Date:</strong> 1973-03-01</p>
+                    <p><strong>Notes:</strong> Iconic prism design.</p>
+                    <p><strong>Genre Tags:</strong> #progressive #rock</p>
+                    <p><strong>Art Tags:</strong> #minimal</p>
+                </div>
+                <div class="popup center-popup">
                     <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png" alt="Dark Side of the Moon">
                     <p><strong>Album:</strong> Dark Side of the Moon</p>
                     <p><strong>Artist:</strong> Pink Floyd</p>
@@ -50,22 +68,18 @@
                     <span class="close-popup" onclick="hidePopup(this)">X</span>
                 </div>
             </div>
-            <div class="album" data-title="Rumours" data-artist="Fleetwood Mac data-date="1977-02-04" data-genres="#softrock" data-art="#photograph">
-                <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG" alt="Rumours" onclick="showPopup(this)">
-                <div class="popup">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG" alt="Rumours">
-                    <p><strong>Album:</strong> Rumours</p>
-                    <p><strong>Artist:</strong> Fleetwood Mac</p>
-                    <p><strong>Release Date:</strong> 1977-02-04</p>
-                    <p><strong>Notes:</strong> My mother's favorite band.</p>
-                    <p><strong>Genre Tags:</strong> #softrock</p>
-                    <p><strong>Art Tags:</strong> #photograph</p>
-                    <span class="close-popup" onclick="hidePopup(this)">X</span>
-                </div>
-            </div>           
             <div class="album" data-title="Thriller" data-artist="Michael Jackson" data-date="1982-11-30" data-genres="#pop #80s" data-art="#iconic">
-                <img src="https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png" alt="Thriller" onclick="showPopup(this)">
-                <div class="popup">
+                <img src="https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png" alt="Thriller" onmouseover="showHoverPopup(this)" onclick="showPopup(this)">
+                <div class="popup hover-popup">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png" alt="Thriller">
+                    <p><strong>Album:</strong> Thriller</p>
+                    <p><strong>Artist:</strong> Michael Jackson</p>
+                    <p><strong>Release Date:</strong> 1982-11-30</p>
+                    <p><strong>Notes:</strong> Best-selling album of all time.</p>
+                    <p><strong>Genre Tags:</strong> #80s #pop</p>
+                    <p><strong>Art Tags:</strong> #iconic</p>
+                </div>
+                <div class="popup center-popup">
                     <img src="https://upload.wikimedia.org/wikipedia/en/5/55/Michael_Jackson_-_Thriller.png" alt="Thriller">
                     <p><strong>Album:</strong> Thriller</p>
                     <p><strong>Artist:</strong> Michael Jackson</p>
@@ -76,16 +90,27 @@
                     <span class="close-popup" onclick="hidePopup(this)">X</span>
                 </div>
             </div>
-            <!-- End of template -->
-        </div>
-        <div id="hover-popup" class="hover-popup">
-            <p id="hover-popup-content"></p>
-        </div>
-    
-        <div id="center-popup" class="center-popup">
-            <div class="popup-content">
-                <span class="close-popup" onclick="hideCenterPopup()">×</span>
-                <p id="center-popup-content"></p>
+            <div class="album" data-title="Rumours" data-artist="Fleetwood Mac" data-date="1977-02-04" data-genres="#rock #classic" data-art="#iconic">
+                <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG" alt="Rumours" onmouseover="showHoverPopup(this)" onclick="showPopup(this)">
+                <div class="popup hover-popup">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG" alt="Rumours">
+                    <p><strong>Album:</strong> Rumours</p>
+                    <p><strong>Artist:</strong> Fleetwood Mac</p>
+                    <p><strong>Release Date:</strong> 1977-02-04</p>
+                    <p><strong>Notes:</strong> One of the best-selling albums of all time.</p>
+                    <p><strong>Genre Tags:</strong> #rock #classic</p>
+                    <p><strong>Art Tags:</strong> #iconic</p>
+                </div>
+                <div class="popup center-popup">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/FMacRumours.PNG" alt="Rumours">
+                    <p><strong>Album:</strong> Rumours</p>
+                    <p><strong>Artist:</strong> Fleetwood Mac</p>
+                    <p><strong>Release Date:</strong> 1977-02-04</p>
+                    <p><strong>Notes:</strong> One of the best-selling albums of all time.</p>
+                    <p><strong>Genre Tags:</strong> #rock #classic</p>
+                    <p><strong>Art Tags:</strong> #iconic</p>
+                    <span class="close-popup" onclick="hidePopup(this)">X</span>
+                </div>
             </div>
         </div>
     </main>
@@ -122,9 +147,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="script.js"></script>
-    <div id="toolbar" class="toolbar">
-        <!-- Toolbar content goes here -->
-        <p>Toolbar</p>
-    </div>    
 </body>
 </html>
