@@ -37,49 +37,15 @@ function sortAlbums() {
 }
 
 function filterAlbums() {
-    const filter = Array.from(document.getElementById('filter-tags').selectedOptions).map(option => option.value.toLowerCase());
+    const filter = document.getElementById('filter-tags').value.toLowerCase();
     const albums = document.getElementsByClassName('album');
 
     Array.from(albums).forEach(album => {
         const tags = album.getAttribute('data-tags').toLowerCase();
-        const match = filter.some(f => tags.includes(f));
-        album.style.display = match ? 'block' : 'none';
+        if (tags.includes(filter)) {
+            album.style.display = 'block';
+        } else {
+            album.style.display = 'none';
+        }
     });
 }
-
-function showPopup(element) {
-    const popup = element.nextElementSibling;
-    popup.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-function hidePopup(element) {
-    const popup = element.parentElement;
-    popup.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-function populateFilterOptions() {
-    const albums = document.getElementsByClassName('album');
-    const tags = new Set();
-
-    Array.from(albums).forEach(album => {
-        album.getAttribute('data-tags').toLowerCase().split(' ').forEach(tag => {
-            tags.add(tag);
-        });
-    });
-
-    const filterSelect = document.getElementById('filter-tags');
-    filterSelect.innerHTML = '';
-
-    Array.from(tags).sort().forEach(tag => {
-        const option = document.createElement('option');
-        option.value = tag;
-        option.text = tag;
-        filterSelect.appendChild(option);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    populateFilterOptions();
-});
