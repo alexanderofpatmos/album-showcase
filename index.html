@@ -9,30 +9,9 @@
 </head>
 <body>
     <header>
-        <div class="left-half">
+        <div class="header-content">
             <h1>Alexander's Favorite Album Covers</h1>
             <p class="site-description">Hello, my name is Alexander. I believe cover artwork is a very essential part of releasing a musical work, as it can influence how the listener may perceive the music. I created this website to catalog some of my favorite album covers.</p>
-        </div>
-        <div class="right-half">
-            <div class="controls">
-                <label for="sort-options">Sort by:</label>
-                <select id="sort-options" onchange="sortAlbums()">
-                    <option value="title">Album Title (A-Z)</option>
-                    <option value="artist">Artist Name (A-Z)</option>
-                    <option value="date">Release Date (Oldest-Newest)</option>
-                </select>
-                <button onclick="toggleSortOrder()" id="sort-order-btn">↑</button>
-            </div>
-            <div class="controls">
-                <label for="filter-tags">Filter by tag:</label>
-                <select id="filter-tags" multiple="multiple">
-                    <!-- Options will be populated dynamically -->
-                </select>
-            </div>
-            <div class="controls">
-                <label for="search-bar">Search:</label>
-                <input type="text" id="search-bar" onkeyup="searchAlbums()" placeholder="Search albums...">
-            </div>
         </div>
     </header>
     <main>
@@ -77,6 +56,29 @@
             <!-- End of template -->
         </div>
     </main>
+    <footer>
+        <div class="bottom-banner">
+            <div class="controls">
+                <label for="sort-options">Sort by:</label>
+                <select id="sort-options" onchange="sortAlbums()">
+                    <option value="title">Album Title (A-Z)</option>
+                    <option value="artist">Artist Name (A-Z)</option>
+                    <option value="date">Release Date (Oldest-Newest)</option>
+                </select>
+                <button onclick="toggleSortOrder()" id="sort-order-btn">↑</button>
+            </div>
+            <div class="controls">
+                <label for="filter-tags">Filter by tag:</label>
+                <select id="filter-tags" multiple="multiple">
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
+            <div class="controls">
+                <label for="search-bar">Search:</label>
+                <input type="text" id="search-bar" onkeyup="searchAlbums()" placeholder="Search albums...">
+            </div>
+        </div>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="script.js"></script>
