@@ -1,3 +1,6 @@
+
+// Existing JavaScript
+
 let sortOrderAsc = true; // To track the current sort order
 
 function sortAlbums() {
@@ -27,124 +30,51 @@ function sortAlbums() {
         albums.reverse();
     }
 
-    // Clear the grid and append sorted albums
-    while (grid.firstChild) {
-        grid.removeChild(grid.firstChild);
-    }
     albums.forEach(album => grid.appendChild(album));
 }
 
-function toggleSortOrder() {
-    sortOrderAsc = !sortOrderAsc;
-    document.getElementById('sort-order-btn').textContent = sortOrderAsc ? '↑' : '↓';
-    sortAlbums();
-}
+// New JavaScript
 
-function filterAlbums() {
-    const selectedOptions = Array.from(document.getElementById('filter-tags').selectedOptions).map(option => option.value.toLowerCase());
-    const albums = document.getElementsByClassName('album');
-
-    Array.from(albums).forEach(album => {
-        const genres = album.getAttribute('data-genres').toLowerCase().split(' ');
-        const arts = album.getAttribute('data-art').toLowerCase().split(' ');
-        const match = selectedOptions.length === 0 || selectedOptions.every(filter => genres.includes(`#${filter}`) || arts.includes(`#${filter}`));
-        album.style.display = match ? 'block' : 'none';
-    });
-}
-
-function searchAlbums() {
-    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-    const albums = document.getElementsByClassName('album');
-
-    Array.from(albums).forEach(album => {
-        const title = album.getAttribute('data-title').toLowerCase();
-        const artist = album.getAttribute('data-artist').toLowerCase();
-        const date = album.getAttribute('data-date').toLowerCase();
-        const genres = album.getAttribute('data-genres').toLowerCase();
-        const arts = album.getAttribute('data-art').toLowerCase();
-        const match = title.includes(searchTerm) || artist.includes(searchTerm) || date.includes(searchTerm) || genres.includes(searchTerm) || arts.includes(searchTerm);
-        album.style.display = match ? 'block' : 'none';
-    });
-}
-
-function showPopup(element) {
-    const popup = element.nextElementSibling;
-    const allPopups = document.querySelectorAll('.popup');
-    allPopups.forEach(p => p.style.display = 'none'); // Hide all popups
-    popup.style.display = 'block';
-    popup.style.position = 'fixed';
-    popup.style.top = '50%';
-    popup.style.left = '50%';
-    popup.style.transform = 'translate(-50%, -50%)';
-    popup.style.width = '60%'; // Ensure larger size for clicked popup
-    document.body.style.overflow = 'hidden';
-}
-
-function hidePopup(element) {
-    const popup = element.parentElement;
-    popup.style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-function populateFilterOptions() {
-    const albums = document.getElementsByClassName('album');
-    const tags = new Set();
-
-    Array.from(albums).forEach(album => {
-        album.getAttribute('data-genres').toLowerCase().split(' ').forEach(tag => {
-            tags.add(tag.replace('#', ''));
-        });
-        album.getAttribute('data-art').toLowerCase().split(' ').forEach(tag => {
-            tags.add(tag.replace('#', ''));
-        });
+// Hover Pop-Up Window
+document.querySelectorAll('.album').forEach(album => {
+    album.addEventListener('mouseover', function (e) {
+        const hoverPopup = document.getElementById('hover-popup');
+        hoverPopup.style.display = 'block';
+        hoverPopup.style.top = `${e.pageY}px`;
+        hoverPopup.style.left = `${e.pageX}px`;
+        hoverPopup.querySelector('.popup-content').innerHTML = `
+            <p><strong>Title:</strong> ${album.getAttribute('data-title')}</p>
+            <p><strong>Artist:</strong> ${album.getAttribute('data-artist')}</p>
+            <p><strong>Date:</strong> ${album.getAttribute('data-date')}</p>
+        `;
     });
 
-    const filterSelect = document.getElementById('filter-tags');
-    filterSelect.innerHTML = '';
-
-    Array.from(tags).sort().forEach(tag => {
-        const option = document.createElement('option');
-        option.value = tag;
-        option.text = tag;
-        filterSelect.appendChild(option);
+    album.addEventListener('mouseout', function () {
+        document.getElementById('hover-popup').style.display = 'none';
     });
 
-    $(filterSelect).select2({
-        placeholder: "Select tags",
-        allowClear: true,
-        closeOnSelect: false,
-        dropdownCssClass: 'dark-dropdown' // Add this line to apply dark theme
+    // Center Pop-Up Window
+    album.addEventListener('click', function () {
+        const centerPopup = document.getElementById('center-popup');
+        centerPopup.style.display = 'block';
+        centerPopup.querySelector('.popup-content').innerHTML = `
+            <div class="close-popup" onclick="closeCenterPopup()">X</div>
+            <p><strong>Title:</strong> ${album.getAttribute('data-title')}</p>
+            <p><strong>Artist:</strong> ${album.getAttribute('data-artist')}</p>
+            <p><strong>Date:</strong> ${album.getAttribute('data-date')}</p>
+            <p><strong>Description:</strong> ${album.getAttribute('data-description')}</p>
+        `;
     });
+});
+
+function closeCenterPopup() {
+    document.getElementById('center-popup').style.display = 'none';
 }
 
-function toggleToolbar() {
-    const toolbarContent = document.getElementById('toolbar-content');
-    const toggleBtn = document.getElementById('toggle-toolbar-btn');
-    if (toolbarContent.style.display === 'none') {
-        toolbarContent.style.display = 'flex';
-        toggleBtn.textContent = '▼ Close Toolbar';
-    } else {
-        toolbarContent.style.display = 'none';
-        toggleBtn.textContent = '▲ Open Toolbar';
+// Close Center Pop-Up Window by clicking outside
+window.addEventListener('click', function (e) {
+    const centerPopup = document.getElementById('center-popup');
+    if (e.target === centerPopup) {
+        centerPopup.style.display = 'none';
     }
-}
-
-function toggleInfoPopup() {
-    const infoPopup = document.getElementById('info-popup');
-    if (infoPopup.style.display === 'none' || infoPopup.style.display === '') {
-        infoPopup.style.display = 'block';
-    } else {
-        infoPopup.style.display = 'none';
-    }
-}
-
-function updateGridWidth(value) {
-    const grid = document.getElementById('album-grid');
-    grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    populateFilterOptions();
-    sortAlbums(); // Default sorting by album title (A-Z)
-    toggleToolbar(); // Ensure toolbar is closed by default
 });
