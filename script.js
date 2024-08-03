@@ -18,7 +18,7 @@ function sortAlbums() {
                 return aValue.localeCompare(bValue);
             case 'date':
                 aValue = new Date(a.getAttribute('data-date'));
-                bValue = new Date(b.getAttribute('data-date'));
+                bValue = new Date(a.getAttribute('data-date'));
                 return aValue - bValue;
         }
     });
@@ -104,23 +104,34 @@ function populateFilterOptions() {
     $(filterSelect).select2({
         placeholder: "Select tags",
         allowClear: true,
-        closeOnSelect: false
+        closeOnSelect: false,
+        dropdownCssClass: 'dark-dropdown' // Add this line to apply dark theme
     });
 }
 
-function toggleBottomBanner() {
-    const bottomBannerContent = document.getElementById('bottom-banner-content');
-    const toggleBtn = document.getElementById('toggle-bottom-banner-btn');
-    if (bottomBannerContent.style.display === 'none') {
-        bottomBannerContent.style.display = 'flex';
-        toggleBtn.textContent = '▼';
+function toggleToolbar() {
+    const toolbarContent = document.getElementById('toolbar-content');
+    const toggleBtn = document.getElementById('toggle-toolbar-btn');
+    if (toolbarContent.style.display === 'none') {
+        toolbarContent.style.display = 'flex';
+        toggleBtn.textContent = '▼ Close Toolbar';
     } else {
-        bottomBannerContent.style.display = 'none';
-        toggleBtn.textContent = '▲';
+        toolbarContent.style.display = 'none';
+        toggleBtn.textContent = '▲ Open Toolbar';
+    }
+}
+
+function toggleInfoPopup() {
+    const infoPopup = document.getElementById('info-popup');
+    if (infoPopup.style.display === 'none' || infoPopup.style.display === '') {
+        infoPopup.style.display = 'block';
+    } else {
+        infoPopup.style.display = 'none';
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     populateFilterOptions();
     sortAlbums(); // Default sorting by album title (A-Z)
+    toggleToolbar(); // Ensure toolbar is closed by default
 });
