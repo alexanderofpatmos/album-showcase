@@ -18,7 +18,7 @@ function sortAlbums() {
                 return aValue.localeCompare(bValue);
             case 'date':
                 aValue = new Date(a.getAttribute('data-date'));
-                bValue = new Date(a.getAttribute('data-date'));
+                bValue = new Date(b.getAttribute('data-date'));
                 return aValue - bValue;
         }
     });
@@ -47,43 +47,9 @@ function filterAlbums() {
     Array.from(albums).forEach(album => {
         const genres = album.getAttribute('data-genres').toLowerCase().split(' ');
         const arts = album.getAttribute('data-art').toLowerCase().split(' ');
-        const match = selectedOptions.length === 0 || selectedOptions.every(filter => genres.includes(`#${filter}`) || arts.includes(`#${filter}`));
-        album.style.display = match ? 'block' : 'none';
+        const match = selectedOptions.length === 0 || selectedOptions.every(filter => genres.includes(filter) || arts.includes(filter));
+        album.style.display = match ? '' : 'none';
     });
-}
-
-function searchAlbums() {
-    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-    const albums = document.getElementsByClassName('album');
-
-    Array.from(albums).forEach(album => {
-        const title = album.getAttribute('data-title').toLowerCase();
-        const artist = album.getAttribute('data-artist').toLowerCase();
-        const date = album.getAttribute('data-date').toLowerCase();
-        const genres = album.getAttribute('data-genres').toLowerCase();
-        const arts = album.getAttribute('data-art').toLowerCase();
-        const match = title.includes(searchTerm) || artist.includes(searchTerm) || date.includes(searchTerm) || genres.includes(searchTerm) || arts.includes(searchTerm);
-        album.style.display = match ? 'block' : 'none';
-    });
-}
-
-function showPopup(element) {
-    const popup = element.nextElementSibling;
-    const allPopups = document.querySelectorAll('.popup');
-    allPopups.forEach(p => p.style.display = 'none'); // Hide all popups
-    popup.style.display = 'block';
-    popup.style.position = 'fixed';
-    popup.style.top = '50%';
-    popup.style.left = '50%';
-    popup.style.transform = 'translate(-50%, -50%)';
-    popup.style.width = '60%'; // Ensure larger size for clicked popup
-    document.body.style.overflow = 'hidden';
-}
-
-function hidePopup(element) {
-    const popup = element.parentElement;
-    popup.style.display = 'none';
-    document.body.style.overflow = 'auto';
 }
 
 function populateFilterOptions() {
