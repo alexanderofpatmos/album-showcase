@@ -243,3 +243,10 @@ footer #sort-order-btn {
 .select2-container .select2-selection--multiple .select2-selection__choice__remove {
     color: #f0f0f0;
 }
+
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
