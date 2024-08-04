@@ -41,15 +41,49 @@ function toggleSortOrder() {
 }
 
 function filterAlbums() {
-    const selectedOptions = Array.from(document.getElementById('modal-filter-tags').selectedOptions).map(option => option.value.toLowerCase());
+    const selectedOptions = Array.from(document.getElementById('filter-tags').selectedOptions).map(option => option.value.toLowerCase());
     const albums = document.getElementsByClassName('album');
 
     Array.from(albums).forEach(album => {
         const genres = album.getAttribute('data-genres').toLowerCase().split(' ');
         const arts = album.getAttribute('data-art').toLowerCase().split(' ');
-        const match = selectedOptions.length === 0 || selectedOptions.every(filter => genres.includes(filter) || arts.includes(filter));
-        album.style.display = match ? '' : 'none';
+        const match = selectedOptions.length === 0 || selectedOptions.every(filter => genres.includes(`#${filter}`) || arts.includes(`#${filter}`));
+        album.style.display = match ? 'block' : 'none';
     });
+}
+
+function searchAlbums() {
+    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+    const albums = document.getElementsByClassName('album');
+
+    Array.from(albums).forEach(album => {
+        const title = album.getAttribute('data-title').toLowerCase();
+        const artist = album.getAttribute('data-artist').toLowerCase();
+        const date = album.getAttribute('data-date').toLowerCase();
+        const genres = album.getAttribute('data-genres').toLowerCase();
+        const arts = album.getAttribute('data-art').toLowerCase();
+        const match = title.includes(searchTerm) || artist.includes(searchTerm) || date.includes(searchTerm) || genres.includes(searchTerm) || arts.includes(searchTerm);
+        album.style.display = match ? 'block' : 'none';
+    });
+}
+
+function showPopup(element) {
+    const popup = element.nextElementSibling;
+    const allPopups = document.querySelectorAll('.popup');
+    allPopups.forEach(p => p.style.display = 'none'); // Hide all popups
+    popup.style.display = 'block';
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.width = '60%'; // Ensure larger size for clicked popup
+    document.body.style.overflow = 'hidden';
+}
+
+function hidePopup(element) {
+    const popup = element.parentElement;
+    popup.style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
 
 function populateFilterOptions() {
@@ -65,7 +99,7 @@ function populateFilterOptions() {
         });
     });
 
-    const filterSelect = document.getElementById('modal-filter-tags');
+    const filterSelect = document.getElementById('filter-tags');
     filterSelect.innerHTML = '';
 
     Array.from(tags).sort().forEach(tag => {
@@ -81,22 +115,6 @@ function populateFilterOptions() {
         closeOnSelect: false,
         dropdownCssClass: 'dark-dropdown' // Add this line to apply dark theme
     });
-
-    // Bind the filter function to the select change event
-    $('#modal-filter-tags').on('change', filterAlbums);
-}
-
-function openTagModal() {
-    document.getElementById('tag-modal').style.display = 'block';
-}
-
-function closeTagModal() {
-    document.getElementById('tag-modal').style.display = 'none';
-}
-
-function applyTagFilter() {
-    filterAlbums();
-    closeTagModal();
 }
 
 function toggleToolbar() {
@@ -123,22 +141,6 @@ function toggleInfoPopup() {
 function updateGridWidth(value) {
     const grid = document.getElementById('album-grid');
     grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
-}
-
-function showPopup(element) {
-    const popup = element.nextElementSibling.nextElementSibling;
-    popup.style.display = 'block';
-}
-
-function hidePopup(element) {
-    element.parentElement.style.display = 'none';
-}
-
-function showHoverPopup(element) {
-    const popup = element.nextElementSibling;
-    popup.style.display = 'block';
-    popup.style.left = element.offsetLeft + 'px';
-    popup.style.top = element.offsetTop + element.offsetHeight + 'px';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
