@@ -1,0 +1,17 @@
+
+/* Example CSS content */
+body {
+    font-family: Arial, sans-serif;
+}
+.album-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+.album {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+.album img {
+    max-width: 100%;
+}
