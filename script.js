@@ -148,30 +148,3 @@ document.addEventListener('DOMContentLoaded', () => {
     sortAlbums(); // Default sorting by album title (A-Z)
     toggleToolbar(); // Ensure toolbar is closed by default
 });
-
-document.addEventListener("DOMContentLoaded", function() {
-    fetch('album-templates.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('album-templates').innerHTML = data;
-        populateTags(); // Call the function to populate tags after loading album templates
-    })
-    .catch(error => console.error('Error loading album templates:', error));
-});
-
-function populateTags() {
-    const albums = document.getElementsByClassName('album');
-    const tagSet = new Set();
-    Array.from(albums).forEach(album => {
-        const tags = album.getAttribute('data-genres').split(' ');
-        tags.forEach(tag => tagSet.add(tag));
-    });
-    const tagFilter = document.getElementById('tag-filter');
-    tagFilter.innerHTML = ''; // Clear existing options
-    tagSet.forEach(tag => {
-        const option = document.createElement('option');
-        option.value = tag;
-        option.textContent = tag;
-        tagFilter.appendChild(option);
-    });
-}
