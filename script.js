@@ -147,5 +147,4 @@ document.addEventListener('DOMContentLoaded', () => {
     populateFilterOptions();
     sortAlbums(); // Default sorting by album title (A-Z)
     toggleToolbar(); // Ensure toolbar is closed by default
-    document.getElementById('filter-tags').addEventListener('change', filterAlbums); // Add event listener for tag filtering
 });
