@@ -18,7 +18,7 @@ function sortAlbums() {
                 return aValue.localeCompare(bValue);
             case 'date':
                 aValue = new Date(a.getAttribute('data-date'));
-                bValue = new Date(a.getAttribute('data-date'));
+                bValue = new Date(b.getAttribute('data-date'));
                 return aValue - bValue;
         }
     });
@@ -84,6 +84,19 @@ function populateFilterOptions() {
 
     // Bind the filter function to the select change event
     $('#filter-tags').on('change', filterAlbums);
+}
+
+function openTagModal() {
+    document.getElementById('tag-modal').style.display = 'block';
+}
+
+function closeTagModal() {
+    document.getElementById('tag-modal').style.display = 'none';
+}
+
+function applyTagFilter() {
+    filterAlbums();
+    closeTagModal();
 }
 
 function toggleToolbar() {
