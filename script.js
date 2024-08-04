@@ -18,7 +18,7 @@ function sortAlbums() {
                 return aValue.localeCompare(bValue);
             case 'date':
                 aValue = new Date(a.getAttribute('data-date'));
-                bValue = new Date(b.getAttribute('data-date'));
+                bValue = new Date(a.getAttribute('data-date'));
                 return aValue - bValue;
         }
     });
@@ -81,6 +81,9 @@ function populateFilterOptions() {
         closeOnSelect: false,
         dropdownCssClass: 'dark-dropdown' // Add this line to apply dark theme
     });
+
+    // Bind the filter function to the select change event
+    $('#filter-tags').on('change', filterAlbums);
 }
 
 function toggleToolbar() {
