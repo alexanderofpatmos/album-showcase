@@ -18,7 +18,7 @@ function sortAlbums() {
                 return aValue.localeCompare(bValue);
             case 'date':
                 aValue = new Date(a.getAttribute('data-date'));
-                bValue = new Date(b.getAttribute('data-date'));
+                bValue = new Date(a.getAttribute('data-date'));
                 return aValue - bValue;
         }
     });
@@ -41,7 +41,7 @@ function toggleSortOrder() {
 }
 
 function filterAlbums() {
-    const selectedOptions = Array.from(document.getElementById('filter-tags').selectedOptions).map(option => option.value.toLowerCase());
+    const selectedOptions = Array.from(document.getElementById('modal-filter-tags').selectedOptions).map(option => option.value.toLowerCase());
     const albums = document.getElementsByClassName('album');
 
     Array.from(albums).forEach(album => {
@@ -65,7 +65,7 @@ function populateFilterOptions() {
         });
     });
 
-    const filterSelect = document.getElementById('filter-tags');
+    const filterSelect = document.getElementById('modal-filter-tags');
     filterSelect.innerHTML = '';
 
     Array.from(tags).sort().forEach(tag => {
@@ -83,7 +83,7 @@ function populateFilterOptions() {
     });
 
     // Bind the filter function to the select change event
-    $('#filter-tags').on('change', filterAlbums);
+    $('#modal-filter-tags').on('change', filterAlbums);
 }
 
 function openTagModal() {
@@ -123,6 +123,22 @@ function toggleInfoPopup() {
 function updateGridWidth(value) {
     const grid = document.getElementById('album-grid');
     grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
+}
+
+function showPopup(element) {
+    const popup = element.nextElementSibling.nextElementSibling;
+    popup.style.display = 'block';
+}
+
+function hidePopup(element) {
+    element.parentElement.style.display = 'none';
+}
+
+function showHoverPopup(element) {
+    const popup = element.nextElementSibling;
+    popup.style.display = 'block';
+    popup.style.left = element.offsetLeft + 'px';
+    popup.style.top = element.offsetTop + element.offsetHeight + 'px';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
