@@ -115,6 +115,11 @@ footer select#filter-tags {
     width: 250px; /* Make the filter box wider */
 }
 
+#tag-filter {
+    margin-left: 10px;
+    min-width: 150px;
+}
+
 footer .select2-container--default .select2-selection--multiple {
     background-color: #555; /* Darken the background */
     color: #f0f0f0;

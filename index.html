@@ -116,27 +116,23 @@
     </main>
     <footer>
         <div class="toolbar">
-            <button onclick="toggleToolbar()" id="toggle-toolbar-btn">▲ Open Toolbar</button>
-            <div id="toolbar-content" style="display: none;">
-                <div class="controls">
-                    <label for="sort-options">Sort by:</label>
-                    <select id="sort-options" onchange="sortAlbums()">
-                        <option value="title">Album Title (A-Z)</option>
-                        <option value="artist">Artist Name (A-Z)</option>
-                        <option value="date">Release Date (Oldest-Newest)</option>
-                    </select>
-                    <button onclick="toggleSortOrder()" id="sort-order-btn">↑</button>
-                </div>
-                <div class="controls">
-                    <label for="grid-width">Grid width:</label>
-                    <input type="range" id="grid-width" min="4" max="10" value="5" oninput="updateGridWidth(this.value)">
-                </div>
-                <div class="controls">
-                    <label for="search-bar">Search:</label>
-                    <input type="text" id="search-bar" onkeyup="searchAlbums()" placeholder="Search albums...">
-                </div>
-            </div>
-        </div>
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select" onchange="sortAlbums()">
+                <!-- Options... -->
+            </select>
+        
+            <label for="grid-width">Grid width:</label>
+            <input type="range" id="grid-width" min="1" max="5" value="3" onchange="adjustGridWidth()">
+        
+            <label for="search-input">Search:</label>
+            <input type="text" id="search-input" oninput="searchAlbums()">
+        
+            <!-- New Filter by tag dropdown -->
+            <label for="tag-filter">Filter by tag:</label>
+            <select id="tag-filter" multiple onchange="filterByTag()">
+                <!-- Options will be populated dynamically -->
+            </select>
+        </div>        
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>

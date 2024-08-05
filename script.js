@@ -52,6 +52,44 @@ function filterAlbums() {
     });
 }
 
+// Function to populate the tag filter dropdown with unique tags
+function populateTagFilter() {
+    const tagFilter = document.getElementById('tag-filter');
+    const albums = document.querySelectorAll('.album');
+    const tags = new Set();
+
+    albums.forEach(album => {
+        const albumTags = album.dataset.genres.split(' ');
+        albumTags.forEach(tag => tags.add(tag));
+    });
+
+    tags.forEach(tag => {
+        const option = document.createElement('option');
+        option.value = tag;
+        option.textContent = tag;
+        tagFilter.appendChild(option);
+    });
+}
+
+// Function to filter albums by selected tags
+function filterByTag() {
+    const tagFilter = document.getElementById('tag-filter');
+    const selectedTags = Array.from(tagFilter.selectedOptions).map(option => option.value);
+    const albums = document.querySelectorAll('.album');
+
+    albums.forEach(album => {
+        const albumTags = album.dataset.genres.split(' ');
+        const matches = selectedTags.every(tag => albumTags.includes(tag));
+        album.style.display = matches ? 'block' : 'none';
+    });
+}
+
+// Call the populateTagFilter function when the page loads
+window.onload = function() {
+    populateTagFilter();
+    // Other onload functions...
+}
+
 function searchAlbums() {
     const searchTerm = document.getElementById('search-bar').value.toLowerCase();
     const albums = document.getElementsByClassName('album');
