@@ -52,6 +52,14 @@ function filterAlbums() {
     });
 }
 
+// Ensure Select2 is initialized for the new dropdown
+$(document).ready(function() {
+    $('#tag-filter').select2({
+        placeholder: "Select tags",
+        allowClear: true
+    });
+});
+
 // Function to populate the tag filter dropdown with unique tags
 function populateTagFilter() {
     const tagFilter = document.getElementById('tag-filter');
@@ -89,6 +97,7 @@ window.onload = function() {
     populateTagFilter();
     // Other onload functions...
 }
+
 
 function searchAlbums() {
     const searchTerm = document.getElementById('search-bar').value.toLowerCase();
