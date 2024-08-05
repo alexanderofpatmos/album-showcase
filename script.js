@@ -86,37 +86,6 @@ function hidePopup(element) {
     document.body.style.overflow = 'auto';
 }
 
-function populateFilterOptions() {
-    const albums = document.getElementsByClassName('album');
-    const tags = new Set();
-
-    Array.from(albums).forEach(album => {
-        album.getAttribute('data-genres').toLowerCase().split(' ').forEach(tag => {
-            tags.add(tag.replace('#', ''));
-        });
-        album.getAttribute('data-art').toLowerCase().split(' ').forEach(tag => {
-            tags.add(tag.replace('#', ''));
-        });
-    });
-
-    const filterSelect = document.getElementById('filter-tags');
-    filterSelect.innerHTML = '';
-
-    Array.from(tags).sort().forEach(tag => {
-        const option = document.createElement('option');
-        option.value = tag;
-        option.text = tag;
-        filterSelect.appendChild(option);
-    });
-
-    $(filterSelect).select2({
-        placeholder: "Select tags",
-        allowClear: true,
-        closeOnSelect: false,
-        dropdownCssClass: 'dark-dropdown' // Add this line to apply dark theme
-    });
-}
-
 function toggleToolbar() {
     const toolbarContent = document.getElementById('toolbar-content');
     const toggleBtn = document.getElementById('toggle-toolbar-btn');
