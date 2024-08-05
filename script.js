@@ -3,7 +3,7 @@ let sortOrderAsc = true; // To track the current sort order
 function sortAlbums() {
     const grid = document.getElementById('album-grid');
     const albums = Array.from(grid.getElementsByClassName('album'));
-    const sortOption = document.getElementById('sort-options').value;
+    const sortOption = document.getElementById('sort-select').value;
 
     albums.sort((a, b) => {
         let aValue, bValue;
@@ -18,7 +18,7 @@ function sortAlbums() {
                 return aValue.localeCompare(bValue);
             case 'date':
                 aValue = new Date(a.getAttribute('data-date'));
-                bValue = new Date(a.getAttribute('data-date'));
+                bValue = new Date(b.getAttribute('data-date'));
                 return aValue - bValue;
         }
     });
@@ -40,19 +40,27 @@ function toggleSortOrder() {
     sortAlbums();
 }
 
-function filterAlbums() {
-    const selectedOptions = Array.from(document.getElementById('filter-tags').selectedOptions).map(option => option.value.toLowerCase());
+function searchAlbums() {
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
     const albums = document.getElementsByClassName('album');
 
     Array.from(albums).forEach(album => {
-        const genres = album.getAttribute('data-genres').toLowerCase().split(' ');
-        const arts = album.getAttribute('data-art').toLowerCase().split(' ');
-        const match = selectedOptions.length === 0 || selectedOptions.every(filter => genres.includes(`#${filter}`) || arts.includes(`#${filter}`));
+        const title = album.getAttribute('data-title').toLowerCase();
+        const artist = album.getAttribute('data-artist').toLowerCase();
+        const date = album.getAttribute('data-date').toLowerCase();
+        const genres = album.getAttribute('data-genres').toLowerCase();
+        const arts = album.getAttribute('data-art').toLowerCase();
+        const match = title.includes(searchTerm) || artist.includes(searchTerm) || date.includes(searchTerm) || genres.includes(searchTerm) || arts.includes(searchTerm);
         album.style.display = match ? 'block' : 'none';
     });
 }
 
-// Complete the toggleToolbar function
+function adjustGridWidth() {
+    const gridWidth = document.getElementById('grid-width').value;
+    const albumGrid = document.getElementById('album-grid');
+    albumGrid.style.gridTemplateColumns = `repeat(${gridWidth}, 1fr)`;
+}
+
 function toggleToolbar() {
     const toolbar = document.getElementById('toolbar-content');
     if (toolbar.style.display === 'none' || toolbar.style.display === '') {
@@ -62,7 +70,6 @@ function toggleToolbar() {
     }
 }
 
-// Ensure Select2 is initialized for the new dropdown
 $(document).ready(function() {
     $('#tag-filter').select2({
         placeholder: "Select tags",
@@ -73,10 +80,10 @@ $(document).ready(function() {
     populateTagFilter();
 
     // Initialize event listeners
-    document.getElementById('sort-options').addEventListener('change', sortAlbums);
+    document.getElementById('sort-select').addEventListener('change', sortAlbums);
     document.getElementById('sort-order-btn').addEventListener('click', toggleSortOrder);
-    document.getElementById('search-bar').addEventListener('input', searchAlbums);
-    document.getElementById('tag-filter').addEventListener('change', filterByTag);
+    document.getElementById('search-input').addEventListener('input', searchAlbums);
+    document.getElementById('grid-width').addEventListener('input', adjustGridWidth);
     document.getElementById('toggle-toolbar-btn').addEventListener('click', toggleToolbar);
 });
 
@@ -117,7 +124,6 @@ window.onload = function() {
     populateTagFilter();
     // Other onload functions...
 }
-
 
 function searchAlbums() {
     const searchTerm = document.getElementById('search-bar').value.toLowerCase();
