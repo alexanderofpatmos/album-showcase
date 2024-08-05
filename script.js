@@ -52,12 +52,32 @@ function filterAlbums() {
     });
 }
 
+// Complete the toggleToolbar function
+function toggleToolbar() {
+    const toolbar = document.getElementById('toolbar-content');
+    if (toolbar.style.display === 'none' || toolbar.style.display === '') {
+        toolbar.style.display = 'flex';
+    } else {
+        toolbar.style.display = 'none';
+    }
+}
+
 // Ensure Select2 is initialized for the new dropdown
 $(document).ready(function() {
     $('#tag-filter').select2({
         placeholder: "Select tags",
         allowClear: true
     });
+    
+    // Populate the tag filter
+    populateTagFilter();
+
+    // Initialize event listeners
+    document.getElementById('sort-options').addEventListener('change', sortAlbums);
+    document.getElementById('sort-order-btn').addEventListener('click', toggleSortOrder);
+    document.getElementById('search-bar').addEventListener('input', searchAlbums);
+    document.getElementById('tag-filter').addEventListener('change', filterByTag);
+    document.getElementById('toggle-toolbar-btn').addEventListener('click', toggleToolbar);
 });
 
 // Function to populate the tag filter dropdown with unique tags
