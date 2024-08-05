@@ -148,3 +148,35 @@ document.addEventListener('DOMContentLoaded', () => {
     sortAlbums(); // Default sorting by album title (A-Z)
     toggleToolbar(); // Ensure toolbar is closed by default
 });
+
+function showPopup(element) {
+    const popup = element.nextElementSibling;
+    popup.style.display = 'block';
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.width = '60%'; // Ensure larger size for clicked popup
+    document.body.style.overflow = 'hidden';
+}
+
+function hidePopup(element) {
+    const popup = element.parentElement;
+    popup.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Show hover popup on mouse over
+function showHoverPopup(element) {
+    const popup = element.nextElementSibling;
+    popup.style.display = 'block';
+    popup.style.position = 'absolute';
+    popup.style.left = `${element.offsetLeft}px`;
+    popup.style.top = `${element.offsetTop + element.offsetHeight}px`;
+}
+
+// Hide hover popup on mouse out
+function hideHoverPopup(element) {
+    const popup = element.nextElementSibling;
+    popup.style.display = 'none';
+}
